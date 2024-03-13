@@ -36,11 +36,11 @@ end;
 
 -- Question 3
 -- ==========
-
+-- We need number of students enrolled in each course hence we need to nat join with takes and cannot j use course table 
 create or replace procedure course_popular(v_dept_name department.dept_name%type) is
     cursor course_frequency is
-        select course_id, title, count(*) as enrollment
-        from course
+        select course_id, title, count(ID) as enrollment
+        from course natural join takes 
         where course.dept_name = v_dept_name
         group by course_id, title;
 
